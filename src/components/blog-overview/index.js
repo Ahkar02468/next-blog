@@ -46,6 +46,26 @@ const BlogOverView = ({ blogsList }) => {
           }
      }
 
+     const handleDeleteBlogByID = async (blogID) => {
+          try {
+               const apiResponse = await fetch(`/api/deleteblog?id=${blogID}`, {
+                    method: "DELETE"
+               })
+               const result = await apiResponse.json()
+               if (result?.success) {
+                    setLoading(false)
+                    setBlogFormData(initialBlogFormData)
+                    setOpenBlogDialog(false)
+                    router.refresh()
+               }
+               console.log(result)
+          } catch (error) {
+               console.log(error)
+               setLoading(false)
+               setBlogFormData(initialBlogFormData)
+          }
+     }
+
 
      return (
           <div className="min-h-screen flex flex-col gap-10 bg-gradient-to-r from-purple-500 to-blue-600 p-6">
@@ -63,7 +83,7 @@ const BlogOverView = ({ blogsList }) => {
                     {
                          blogsList && blogsList.length > 0
                               ? blogsList.map(blog => (
-                                   <Card className="p-5">
+                                   <Card className="p-5" key={blog._id}>
                                         <CardContent>
                                              <CardTitle>
                                                   {blog?.title}
@@ -73,13 +93,13 @@ const BlogOverView = ({ blogsList }) => {
                                              </CardDescription>
                                              <div className="mt-5 flex gap-5 justify-center items-center">
                                                   <Button>Edit</Button>
-                                                  <Button>Delete</Button>
+                                                  <Button onClick={() => handleDeleteBlogByID(blog._id)}>Delete</Button>
                                              </div>
                                         </CardContent>
                                    </Card>
                               )
                               )
-                              : null
+                              : <label className="text-6xl font-extrabold">No blogs are found. Please add some bolgs.</label>
                     }
                </div>
           </div>
