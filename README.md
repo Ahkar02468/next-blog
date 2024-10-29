@@ -3,7 +3,7 @@
 A modern blog application built with Next.js, TailwindCSS, and other cutting-edge technologies.
 
 ![Blogs List](https://github.com/Ahkar02468/next-blog/blob/main/public/bolg-list.png)
-![Form Style]([https://github.com/Ahkar02468/next-blog/blob/main/public/bolg-list.png](https://github.com/Ahkar02468/next-blog/blob/main/public/blog-add-new.png))
+![Form Style](https://github.com/Ahkar02468/next-blog/blob/main/public/blog-add-new.png)
 
 ## 🚀 Features
 
