@@ -1,3 +1,4 @@
+"use client"
 import {
      Dialog,
      DialogContent,
@@ -13,15 +14,22 @@ const AddNewBlog = ({
      openBlogDialog,
      setOpenBlogDialog,
      loading,
-     setLoading,
      blogFormData,
-     setBlogFormData }) => {
+     setBlogFormData,
+     handleBlogDataSave
+}) => {
      return (
           <>
                <div>
                     <Button onClick={() => setOpenBlogDialog(true)}>{name}</Button>
                </div>
-               <Dialog open={openBlogDialog} onOpenChange={setOpenBlogDialog}>
+               <Dialog open={openBlogDialog} onOpenChange={() => {
+                    setOpenBlogDialog(false)
+                    setBlogFormData({
+                         title: "",
+                         description: "",
+                    })
+               }}>
                     <DialogContent className="sm:max-w-[425px]">
                          <DialogHeader>
                               <DialogTitle>{name}</DialogTitle>
@@ -36,10 +44,10 @@ const AddNewBlog = ({
                                         name="title"
                                         placeholder="Enter blog title"
                                         value={blogFormData.title}
-                                        onChange={(e) =>
+                                        onChange={(event) =>
                                              setBlogFormData({
                                                   ...blogFormData,
-                                                  title: e.target.value,
+                                                  title: event.target.value,
                                              })
                                         }
                                         className="col-span-3"
@@ -54,10 +62,10 @@ const AddNewBlog = ({
                                         name="description"
                                         value={blogFormData.description}
                                         placeholder="Enter blog description"
-                                        onChange={(e) =>
+                                        onChange={(event) =>
                                              setBlogFormData({
                                                   ...blogFormData,
-                                                  description: e.target.value,
+                                                  description: event.target.value,
                                              })
                                         }
                                         className="col-span-3"
@@ -65,7 +73,9 @@ const AddNewBlog = ({
                               </div>
                          </div>
                          <DialogFooter>
-                              <Button type="button">Add</Button>
+                              <Button onClick={handleBlogDataSave} type="button">
+                                   {loading ? "Saving Changes" : "Save Changes"}
+                              </Button>
                          </DialogFooter>
                     </DialogContent>
                </Dialog>

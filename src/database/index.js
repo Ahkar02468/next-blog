@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 const connnectToMongo = async () => {
-     const connectionURL = "mongodb+srv://ahkarshwebaw:vidTube123456@cluster0.ohdlloc.mongodb.net/"
+     const connectionURL = "mongodb+srv://ahkarshwebaw:vidTube123456@next-cluster.nyuhc.mongodb.net/blogs?retryWrites=true&w=majority&appName=Next-Cluster"
+
      mongoose
           .connect(connectionURL)
           .then(() => console.log("Blog db connection success."))

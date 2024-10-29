@@ -1,4 +1,4 @@
-import BlogOverView from '@/components'
+import BlogOverView from '@/components/blog-overview'
 import React from 'react'
 
 const Blogs = () => {
