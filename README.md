@@ -22,12 +22,23 @@ GitHub
 
 1. Clone the repository:
 ```bash
-git clone [your-repository-url]
+git clone [repository-url]
+```
+## 🎯 Environment Variables
+
+
+Create a .env.local file in the root directory and add the following variables:
+
+> NEXT_PUBLIC_MONGO_URI=your mongo connection string
+
+## Install the dependencies:
+```
 cd blog
 pnpm install
 pnpm dev
-
-🎨 Project Structure
+```
+## 🎨 Project Structure
+```
 blog/
 ├── src/
 │   ├── app/

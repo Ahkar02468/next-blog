@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const connnectToMongo = async () => {
-     const connectionURL = "mongodb+srv://ahkarshwebaw:vidTube123456@next-cluster.nyuhc.mongodb.net/blogs?retryWrites=true&w=majority&appName=Next-Cluster"
+     const connectionURL = process.env.NEXT_PUBLIC_MONGO_URI
 
      mongoose
           .connect(connectionURL)
