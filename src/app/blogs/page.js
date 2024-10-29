@@ -16,7 +16,7 @@ const fetchListOfBlog = async () => {
 }
 const Blogs = async () => {
      const blogsList = await fetchListOfBlog()
-     console.log(blogsList)
+     // console.log(blogsList)
      return (
           <BlogOverView blogsList={blogsList} />
      )

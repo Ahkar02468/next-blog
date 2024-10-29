@@ -45,7 +45,7 @@ const BlogOverView = ({ blogsList }) => {
                     setEditableBlogID(null)
                     router.refresh()
                }
-               console.log(result)
+               // console.log(result)
           } catch (error) {
                console.log(error)
                setLoading(false)
@@ -65,7 +65,7 @@ const BlogOverView = ({ blogsList }) => {
                     setOpenBlogDialog(false)
                     router.refresh()
                }
-               console.log(result)
+               // console.log(result)
           } catch (error) {
                console.log(error)
                setLoading(false)
@@ -75,7 +75,7 @@ const BlogOverView = ({ blogsList }) => {
 
      const handleEditBlog = (blog) => {
           setEditableBlogID(blog._id)
-          console.log(editableBlogID)
+          // console.log(editableBlogID)
           setBlogFormData({
                title: blog.title,
                description: blog.description,
