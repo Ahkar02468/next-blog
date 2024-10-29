@@ -33,7 +33,7 @@ Create a .env.local file in the root directory and add the following variables:
 
 ## Install the dependencies:
 ```
-cd blog
+cd next-blog
 pnpm install
 pnpm dev
 ```
