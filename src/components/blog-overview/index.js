@@ -19,6 +19,7 @@ const BlogOverView = ({ blogsList }) => {
      const [openBlogDialog, setOpenBlogDialog] = useState(false)
      const [loading, setLoading] = useState(false)
      const [blogFormData, setBlogFormData] = useState(initialBlogFormData)
+     const [editableBlogID, setEditableBlogID] = useState(null)
      const router = useRouter()
      useEffect(() => {
           router.refresh()
@@ -27,7 +28,12 @@ const BlogOverView = ({ blogsList }) => {
      const handleBlogDataSave = async () => {
           try {
                setLoading(true)
-               const apiResponse = await fetch("/api/addblog", {
+               const apiResponse = editableBlogID !== null
+                    ? await fetch(`/api/updateblog?id=${editableBlogID}`, {
+                         method: "PUT",
+                         body: JSON.stringify(blogFormData)
+                    })
+                    : await fetch("/api/addblog", {
                     method: "POST",
                     body: JSON.stringify(blogFormData)
                })
@@ -36,6 +42,7 @@ const BlogOverView = ({ blogsList }) => {
                     setLoading(false)
                     setBlogFormData(initialBlogFormData)
                     setOpenBlogDialog(false)
+                    setEditableBlogID(null)
                     router.refresh()
                }
                console.log(result)
@@ -66,11 +73,27 @@ const BlogOverView = ({ blogsList }) => {
           }
      }
 
+     const handleEditBlog = (blog) => {
+          setEditableBlogID(blog._id)
+          console.log(editableBlogID)
+          setBlogFormData({
+               title: blog.title,
+               description: blog.description,
+          })
+          setOpenBlogDialog(true)
+          try {
+
+          } catch (error) {
+               console.log(error)
+               setLoading(false)
+               setBlogFormData(initialBlogFormData)
+          }
+     }
+
 
      return (
           <div className="min-h-screen flex flex-col gap-10 bg-gradient-to-r from-purple-500 to-blue-600 p-6">
                <AddNewBlog
-                    name="Add New Blog"
                     openBlogDialog={openBlogDialog}
                     setOpenBlogDialog={setOpenBlogDialog}
                     loading={loading}
@@ -78,6 +101,8 @@ const BlogOverView = ({ blogsList }) => {
                     blogFormData={blogFormData}
                     setBlogFormData={setBlogFormData}
                     handleBlogDataSave={handleBlogDataSave}
+                    editableBlogID={editableBlogID}
+                    setEditableBlogID={setEditableBlogID}
                />
                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5">
                     {
@@ -92,7 +117,7 @@ const BlogOverView = ({ blogsList }) => {
                                                   {blog?.description}
                                              </CardDescription>
                                              <div className="mt-5 flex gap-5 justify-center items-center">
-                                                  <Button>Edit</Button>
+                                                  <Button onClick={() => handleEditBlog(blog)}>Edit</Button>
                                                   <Button onClick={() => handleDeleteBlogByID(blog._id)}>Delete</Button>
                                              </div>
                                         </CardContent>
